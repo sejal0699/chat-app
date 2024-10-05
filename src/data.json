@@ -1,0 +1,161 @@
+[
+    {
+        "_id": 1,
+        "name": "Alice Smith",
+        "phoneNumber": "123-456-7890",
+        "profileImg": "AS"
+    },
+    {
+        "_id": 2,
+        "name": "Bob Johnson",
+        "phoneNumber": "987-654-3210",
+        "profileImg": "BJ"
+    },
+    {
+        "_id": 3,
+        "name": "Charlie Brown",
+        "phoneNumber": "555-123-4567",
+        "profileImg": "CB"
+    },
+    {
+        "_id": 4,
+        "name": "David Wilson",
+        "phoneNumber": "444-567-8901",
+        "profileImg": "DW"
+    },
+    {
+        "_id": 5,
+        "name": "Alice Wonder",
+        "phoneNumber": "123-456-7899",
+        "profileImg": "AW"
+    },
+    {
+        "_id": 6,
+        "name": "Cassio Zen",
+        "phoneNumber": "123-456-7990",
+        "profileImg": "CZ"
+    },
+    {
+        "_id": 7,
+        "name": "Dan Abramov",
+        "phoneNumber": "123-456-7800",
+        "profileImg": "DA"
+    },
+    {
+        "_id": 8,
+        "name": "Alice Doe",
+        "phoneNumber": "123-456-9890",
+        "profileImg": "AD"
+    },
+    {
+        "_id": 9,
+        "name": "John Smith",
+        "phoneNumber": "123-459-7890",
+        "profileImg": "JS"
+    },
+    {
+        "_id": 10,
+        "name": "John Doe",
+        "phoneNumber": "173-456-7890",
+        "profileImg": "JD"
+    },
+    {
+        "_id": 11,
+        "name": "John Stone",
+        "phoneNumber": "113-456-7890",
+        "profileImg": "JS"
+    },
+ 
+        {
+            "_id": 12,
+            "name": "Emily Clark",
+            "phoneNumber": "222-333-4444",
+            "profileImg": "EC"
+        },
+        {
+            "_id": 13,
+            "name": "Michael Brown",
+            "phoneNumber": "555-678-1234",
+            "profileImg": "MB"
+        },
+        {
+            "_id": 14,
+            "name": "Sophie Turner",
+            "phoneNumber": "888-999-0000",
+            "profileImg": "ST"
+        },
+        {
+            "_id": 15,
+            "name": "Oliver Twist",
+            "phoneNumber": "444-123-9876",
+            "profileImg": "OT"
+        },
+        {
+            "_id": 16,
+            "name": "Jessica Rabbit",
+            "phoneNumber": "333-456-7890",
+            "profileImg": "JR"
+        },
+        {
+            "_id": 17,
+            "name": "Tom Hardy",
+            "phoneNumber": "222-444-5555",
+            "profileImg": "TH"
+        },
+        {
+            "_id": 18,
+            "name": "Luna Lovegood",
+            "phoneNumber": "666-777-8888",
+            "profileImg": "LL"
+        },
+        {
+            "_id": 19,
+            "name": "Peter Parker",
+            "phoneNumber": "444-222-1111",
+            "profileImg": "PP"
+        },
+        {
+            "_id": 20,
+            "name": "Natasha Romanoff",
+            "phoneNumber": "555-333-2222",
+            "profileImg": "NR"
+        },
+        {
+            "_id": 21,
+            "name": "Bruce Wayne",
+            "phoneNumber": "999-888-7777",
+            "profileImg": "BW"
+        },
+        {
+            "_id": 22,
+            "name": "Clark Kent",
+            "phoneNumber": "123-321-1234",
+            "profileImg": "CK"
+        },
+        {
+            "_id": 23,
+            "name": "Wanda Maximoff",
+            "phoneNumber": "111-222-3333",
+            "profileImg": "WM"
+        },
+        {
+            "_id": 24,
+            "name": "Harry Potter",
+            "phoneNumber": "444-555-6666",
+            "profileImg": "HP"
+        },
+        {
+            "_id": 25,
+            "name": "Diana Prince",
+            "phoneNumber": "555-666-7777",
+            "profileImg": "DP"
+        },
+        {
+            "_id": 26,
+            "name": "James Bond",
+            "phoneNumber": "777-888-9999",
+            "profileImg": "JB"
+        }
+    ]
+    
+
