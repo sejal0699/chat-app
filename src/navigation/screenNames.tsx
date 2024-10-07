@@ -3,7 +3,7 @@ const ScreenNames = {
   Login: 'login',
   Splash: 'SplashScreen',
   Profile: 'Account',
-  BottomTab: 'bottomStack',
+  BottomTab: 'Home',
   Reset: 'reset',
   FA: '2fa',
   Drawer: 'drawerStack',
@@ -16,7 +16,8 @@ const ScreenNames = {
   Chat:'chat',
   Contacts:'contact',
   ChatScreen:'chatScreen',
-  Header:'Header'
+  Header:'Header',
+  Feed:'Feed'
 };
 
 export { ScreenNames };

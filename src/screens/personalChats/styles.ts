@@ -89,6 +89,7 @@ export default StyleSheet.create({
       cartIcon:{
         marginTop:20,
         marginRight:20
-      }
+      },
+      
       
 })

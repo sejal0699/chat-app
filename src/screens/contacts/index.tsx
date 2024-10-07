@@ -29,13 +29,17 @@ const Contact = () => {
   const [allContacts, setAllContacts] = useState<Contact[]>([]);
   const [filteredContacts, setFilteredContacts] = useState<Contact[]>([]);
   const [hasSearched, setHasSearched] = useState<boolean>(false);
-
   useEffect(() => {
     const fetchContacts = async () => {
       const permission = await Contacts.requestPermission();
       if (permission === 'authorized') {
         const fetchedContacts = await Contacts.getAll();
-        const mergedContacts: Contact[] = [...fetchedContacts, ...contactsData];
+        const normalizedContacts = fetchedContacts.map(contact => ({
+          recordID: contact.recordID,
+          displayName: `${contact.givenName} ${contact.familyName}`.trim(),
+          image: contact.hasThumbnail ? contact.thumbnailPath : null,
+        }));
+        const mergedContacts: Contact[] = [...normalizedContacts, ...contactsData];
         setAllContacts(mergedContacts);
       } else {
         console.log("Permission to access contacts was denied.");
@@ -51,6 +55,8 @@ const Contact = () => {
     if (query) {
       const filtered = allContacts.filter((contact) => {
         const contactName = contact.displayName || contact.name || '';
+       // console.log('ppp',contact.displayName);
+        
         return contactName.toLowerCase().startsWith(query.toLowerCase());
       });
       setFilteredContacts(filtered);
@@ -58,6 +64,9 @@ const Contact = () => {
       setFilteredContacts([]);
     }
   };
+  const handleClear=()=>{
+    setSearchQuery("")
+  }
 
   const getInitials = (name?: string) => {
     if (!name) return '';
@@ -83,7 +92,9 @@ const Contact = () => {
             value={searchQuery}
             onChangeText={handleSearch}
           />
+          <TouchableOpacity onPress={handleClear}>
           <Image source={Icons.cross} style={styles.crossIcon} />
+          </TouchableOpacity>
         </View>
       </View>
 

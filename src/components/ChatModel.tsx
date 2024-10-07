@@ -8,13 +8,13 @@ interface SecureAccountModalProps {
   visible: boolean,
   closeModal: () => void
 }
-const SecureAccountModal = ({ visible, closeModal }: SecureAccountModalProps) => {
-  const navigation = useNavigation();
 
+
+const SecureAccountModal = ({ visible, closeModal }: SecureAccountModalProps) => {
+  const navigation:any = useNavigation();
   const handleButtonPress=()=>{
     closeModal();
     navigation.navigate(ScreenNames.Contacts)
- 
   }
   return (
     <Modal
