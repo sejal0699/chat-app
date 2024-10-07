@@ -39,7 +39,10 @@ const Contact = () => {
           displayName: `${contact.givenName} ${contact.familyName}`.trim(),
           image: contact.hasThumbnail ? contact.thumbnailPath : null,
         }));
-        const mergedContacts: Contact[] = [...normalizedContacts, ...contactsData];
+        //@ts-ignore
+        const mergedContacts : Contact[] = [...normalizedContacts, ...contactsData];
+        console.log(mergedContacts);
+        
         setAllContacts(mergedContacts);
       } else {
         console.log("Permission to access contacts was denied.");

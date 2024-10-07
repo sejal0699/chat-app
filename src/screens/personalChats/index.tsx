@@ -136,15 +136,18 @@ const ChatScreen = ({ route }: Props) => {
     setReactionModal(false);
     // setCustomModalVisible(true);
   };
-
+  
   const handleEmojiPress = (emoji: string) => {
+   // alert(emoji)
     if (messageIdToDelete) {
       setMessages((prevMessages) => {
         return prevMessages.map((msg) => {
           if (msg._id === messageIdToDelete) {
             return {
               ...msg,
-              reaction: msg.reaction ? null : emoji,
+             // reaction:  emoji,
+             //@ts-ignore
+             reaction: msg.reaction === emoji ? null : emoji,
             };
           }
           return msg;
