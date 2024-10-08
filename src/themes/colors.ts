@@ -8,11 +8,13 @@ export default {
   blue: '#007BFF',
   alertRed: '#F44336',
   strongBlue: '#2A7BBB',
-  lightGrey: '#888',
+  lightGrey: '#ccc',
   overlayColor: 'rgba(0,0,0,0.5)',
-  darkblue: '#000080',
   pink: '#EE28A9',
   grey: '#4B5879',
   skyblue: '#E6E6FA',
-  lightGray: '#85929C'
+  lightGray: '#85929C',
+  darkblue:'#0084ff',
+  Gray:'#f0f0f0',
+  lightBlue:'#E6EDF3'
 };

@@ -4,7 +4,7 @@ import { colors } from "../../themes";
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:'#E6EDF3',
+    backgroundColor:colors.lightBlue,
   },
   searchBox: {
     padding: 15,
@@ -24,7 +24,7 @@ export default StyleSheet.create({
   chatUser: {
     padding: 15,
     borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
+    borderBottomColor: colors.lightGrey,
   },
   chatUserName: {
     fontSize: 16,
@@ -35,7 +35,7 @@ export default StyleSheet.create({
     margin:10,
     padding:10,
 borderBottomWidth:1,
-        borderBottomColor:'#CCCCCC'
+borderBottomColor:'#CCCCCC'
   
   },
   lastMessageText: {

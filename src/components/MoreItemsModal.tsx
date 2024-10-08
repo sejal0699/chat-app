@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
     optionContainer: {
-        padding: 20,
+        padding: 25,
         backgroundColor: colors.white,
         borderRadius: 10,
         borderWidth: 1,
@@ -73,8 +73,8 @@ const styles = StyleSheet.create({
     modalContainer: {
         width: '100%',
         backgroundColor: 'white',
-        borderTopRightRadius: 10,
-        borderTopLeftRadius: 10,
+        borderTopRightRadius: 12,
+        borderTopLeftRadius: 12,
         alignItems: 'center',
     },
     modalView: {

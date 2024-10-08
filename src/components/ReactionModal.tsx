@@ -40,22 +40,36 @@ const ReactionModal = ({ visible, closeModal,onEmojiPress,onDeletePress }: Secur
                         </View>
                         <TouchableOpacity>
                             <View style={styles.optionContainer}>
-                                <Image source={Icons.eyeIcon} style={styles.optionIcon} />
-                                <Text style={styles.modalOptionText}>View details</Text>
+                                <Image source={Icons.replyIcon} style={styles.optionIcon} />
+                                <Text style={styles.modalOptionText}>Reply</Text>
                             </View>
                         </TouchableOpacity>
 
                         <TouchableOpacity>
                             <View style={styles.optionContainer}>
-                                <Image source={Icons.unpinIcon} style={styles.optionIcon} />
-                                <Text style={styles.modalOptionText}>Unpin Chat</Text>
+                                <Image source={Icons.pinIcon} style={styles.optionIcon} />
+                                <Text style={styles.modalOptionText}>Forward</Text>
                             </View>
                         </TouchableOpacity>
 
                         <TouchableOpacity>
                             <View style={styles.optionContainer}>
-                                <Image source={Icons.search} style={styles.optionIcon} />
-                                <Text style={styles.modalOptionText}>Search Chat</Text>
+                                <Image source={Icons.copy} style={styles.optionIcon} />
+                                <Text style={styles.modalOptionText}>Copy</Text>
+                            </View>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity>
+                            <View style={styles.optionContainer}>
+                                <Image source={Icons.stars} style={styles.optionIcon} />
+                                <Text style={styles.modalOptionText}>Star</Text>
+                            </View>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity>
+                            <View style={styles.optionContainer}>
+                                <Image source={Icons.report} style={styles.optionIcon} />
+                                <Text style={styles.modalOptionText}>Report</Text>
                             </View>
                         </TouchableOpacity>
 
@@ -79,15 +93,14 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
     optionContainer: {
-        padding: 20,
+        padding: 15,
         backgroundColor: colors.white,
         borderRadius: 10,
-        borderWidth: 1,
-        borderColor: '#ddd',
+        borderBottomWidth: 1,
+        borderBottomColor: '#ddd',
         width: '100%',
         alignItems: 'center',
         flexDirection: 'row',
-    
     },
     modalContainer: {
         width: '100%',
@@ -113,7 +126,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginLeft: 20,
     },
-    
     optionIcon: {
         width: 24,
         height: 24,
@@ -123,19 +135,18 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         padding: 26,
         backgroundColor: colors.white,
-        borderRadius:20,
-        width: '100%',
         alignItems: 'center',
        justifyContent:'space-between',
-       margin:10
-    
+       margin:10,
+       borderRadius: 10,
+       borderBottomWidth: 1,
+       borderBottomColor: '#ddd',
+       width: '100%',
     },
     emojiIcon:{
-       
             width: 35,
             height: 35,
             marginRight: 10,
-        
     }
 });
 

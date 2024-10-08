@@ -59,7 +59,6 @@ const Contact = () => {
       const filtered = allContacts.filter((contact) => {
         const contactName = contact.displayName || contact.name || '';
        // console.log('ppp',contact.displayName);
-        
         return contactName.toLowerCase().startsWith(query.toLowerCase());
       });
       setFilteredContacts(filtered);

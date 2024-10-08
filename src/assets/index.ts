@@ -42,7 +42,7 @@ const Icons = {
     moreIcon:require('./icons/more.png'),
     addIcon:require('./icons/add.png'),
     deleteIcon:require('./icons/delete.png'),
-    unpinIcon:require('./icons/pin.png'),
+    pinIcon:require('./icons/pin.png'),
     plusIcon:require('./icons/icon.png'),
     binIcon:require('./icons/bin.png'),
     likeIcon:require('./icons/like.png'),
@@ -50,6 +50,10 @@ const Icons = {
     heartIcon:require('./icons/heart.png'),
     confettyIcon:require('./icons/confetty.png'),
     laughIcon:require('./icons/laugh.png'),
+    replyIcon:require('./icons/reply.png'),
+    report:require('./icons/report.png'),
+    stars:require('./icons/stars.png'),
+    copy:require('./icons/copy.png'),
 };
 
 const Images = {

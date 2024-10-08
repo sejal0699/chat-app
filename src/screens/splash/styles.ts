@@ -10,7 +10,7 @@ export default StyleSheet.create({
     },
     logo: {
     flex:1,
-    resizeMode:'contain',
+    resizeMode:'center',
     width:'100%'
     },
     text: {

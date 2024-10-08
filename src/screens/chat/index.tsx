@@ -66,7 +66,7 @@ const Chat = () => {
         <Image source={Icons.search} />
         <Text style={styles.searchText}>Search Messages...</Text>
       </View>
-      {/* <Button title="Clear Chat Users" onPress={clearChatUsers} /> */}
+      <Button title="Clear Chat Users" onPress={clearChatUsers} />
       <View style={styles.box}>
         {chatUsers.length === 0 ? (
           <EmptyScreen />
