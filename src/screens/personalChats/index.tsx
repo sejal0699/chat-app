@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import {View,Text,TouchableOpacity,Image,ImageBackground} from "react-native";
-import { GiftedChat, IMessage, InputToolbar } from "react-native-gifted-chat";
+import { GiftedChat, IMessage, InputToolbar, MessageText } from "react-native-gifted-chat";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styles from "./styles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -38,7 +38,7 @@ const customtInputToolbar = (props: any) => {
     <InputToolbar
       {...props}
       containerStyle={{
-        backgroundColor: "white",
+        backgroundColor: colors.white,
         borderTopColor: "#E8E8E8",
         borderTopWidth: 1,
         padding: 8,
@@ -55,9 +55,8 @@ const ChatScreen = ({ route }: Props) => {
   const [reactionModal, setReactionModal] = useState(false);
   const [toggle, setToggle] = useState(false);
   const [isCustomModalVisible, setCustomModalVisible] = useState(false);
-  const [messageIdToDelete, setMessageIdToDelete] = useState<number | null>(
-    null
-  );
+  const [messageIdToDelete, setMessageIdToDelete] = useState<number | null>(null);
+  const [text,setText]=useState('')
   const chatId = user._id;
   console.log(chatId);
   const navigation = useNavigation();
@@ -89,9 +88,9 @@ const ChatScreen = ({ route }: Props) => {
           {currentMessage.reaction && (
             <View
               style={{
-                top: -12,
+                top: -14,
                 position: "absolute",
-                left: isUserMessage ? -16 : 50,
+                left: isUserMessage ? -16 : 120,
                 padding: 5,
                 backgroundColor: colors.white,
                 borderRadius: 10,
@@ -167,6 +166,7 @@ const ChatScreen = ({ route }: Props) => {
     setReactionModal(true);
     setPersonChat(message);
   };
+  
 
   const handleDeletes = async (id: number) => {
     console.log("id is", id);
@@ -208,7 +208,10 @@ const ChatScreen = ({ route }: Props) => {
               },
             ]);
           }
-        }}
+          
+        }
+       
+      }
       >
         <Image  source={Icons.telegram} style={styles.sendIcon}/>
       </TouchableOpacity>
@@ -251,6 +254,7 @@ const ChatScreen = ({ route }: Props) => {
       }
       return updatedMessages;
     });
+    setText('');
   };
 
   const storeChatUser = async (chatUser: User, lastMessage: IMessage) => {
@@ -288,6 +292,7 @@ const ChatScreen = ({ route }: Props) => {
   const handlePress = () => {
     setModalVisible(true);
   };
+
 
   return (
     <View style={styles.container}>
@@ -334,6 +339,8 @@ const ChatScreen = ({ route }: Props) => {
           renderSend={renderSend}
           onLongPress={onLongPress}
           renderMessage={renderMessage}
+          onInputTextChanged={setText} 
+          text={text}
         />
       </ImageBackground>
 
@@ -348,7 +355,7 @@ const ChatScreen = ({ route }: Props) => {
         visible={isCustomModalVisible}
         title="Delete Message?"
         description="Are you sure you want to delete this message?"
-        imageSource={Icons.binIcon}
+        imageSource={Icons.deleteModalIcon}
         buttonText="Yes, Delete"
         secondButtonText="Cancel"
         closeModal={() => setCustomModalVisible(false)}

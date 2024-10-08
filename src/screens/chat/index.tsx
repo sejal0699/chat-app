@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   Button,
+  TextInput,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Header from "../../components/Header";
@@ -27,28 +28,42 @@ interface ChatUser {
 const Chat = () => {
   const [chatUsers, setChatUsers] = useState<ChatUser[]>([]);
   const navigation: any = useNavigation();
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [filteredContacts, setFilteredContacts] = useState<ChatUser[]>([]);
 
   const loadChatUsers = async () => {
     const storedChatUsers = await AsyncStorage.getItem("chatUsers");
-    //console.log('gggg',storedChatUsers);
 
     if (storedChatUsers) {
       const parsedUsers = JSON.parse(storedChatUsers);
       setChatUsers(parsedUsers);
+      setFilteredContacts(parsedUsers); 
     } else {
       setChatUsers([]);
+      setFilteredContacts([]);
     }
   };
 
   useEffect(() => {
     loadChatUsers();
-  }, [chatUsers]);
+  }, [chatUsers]); 
 
-  //console.log('kkkk',chatUsers);
+  useEffect(() => {
+    // Filter contacts whenever searchQuery changes
+    if (searchQuery) {
+      const filtered = chatUsers.filter((contact) => {
+        const contactName = contact.displayName || contact.name || '';
+        return contactName.toLowerCase().includes(searchQuery.toLowerCase());
+      });
+      setFilteredContacts(filtered);
+    } else {
+      setFilteredContacts(chatUsers);
+    }
+  }, [searchQuery, chatUsers]);
 
   const clearChatUsers = async () => {
     await AsyncStorage.clear();
-    setChatUsers([]);
+    loadChatUsers(); 
   };
 
   const getInitials = (name?: string, displayName?: string) => {
@@ -62,18 +77,24 @@ const Chat = () => {
   return (
     <View style={styles.container}>
       <Header />
+      
       <View style={styles.searchBox}>
         <Image source={Icons.search} />
-        <Text style={styles.searchText}>Search Messages...</Text>
+        <TextInput
+          placeholder="Search Here..."
+          value={searchQuery}
+          onChangeText={setSearchQuery} 
+        />
       </View>
+
       <Button title="Clear Chat Users" onPress={clearChatUsers} />
       <View style={styles.box}>
-        {chatUsers.length === 0 ? (
+        {filteredContacts.length === 0 ? (
           <EmptyScreen />
         ) : (
           <View style={styles.listContainer}>
             <FlatList
-              data={chatUsers}
+              data={filteredContacts} 
               keyExtractor={(item) =>
                 item._id ? item._id.toString() : "defaultKey"
               }

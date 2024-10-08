@@ -52,8 +52,8 @@ const CustomModal = (props: CustomModalProps) => {
                     <Text style={styles.modalMessage}>{description}</Text>
                     <View style={styles.buttonContainer}>
                     {secondButtonText && (
-                            <TouchableOpacity onPress={handleSecondButtonPress} style={styles.okButton}>
-                                <Text style={styles.okButtonText}>{secondButtonText}</Text>
+                            <TouchableOpacity onPress={handleSecondButtonPress} style={styles.okButton1}>
+                                <Text style={styles.okButtonText1}>{secondButtonText}</Text>
                             </TouchableOpacity>
                         )}
                         <TouchableOpacity onPress={handleButtonPress} style={styles.okButton}>
@@ -109,8 +109,22 @@ const styles = StyleSheet.create({
         flex: 1, 
         marginHorizontal: 5, 
     },
+    okButton1: {
+        backgroundColor: colors.Gray,
+        paddingHorizontal: 20,
+        paddingVertical: 16,
+        borderRadius: 5,
+        flex: 1, 
+        marginHorizontal: 5, 
+     
+    },
     okButtonText: {
         color: 'white',
+        fontSize: 14,
+        textAlign: 'center',
+    },
+    okButtonText1: {
+        color: colors.black,
         fontSize: 14,
         textAlign: 'center',
     },

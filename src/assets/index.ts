@@ -54,6 +54,8 @@ const Icons = {
     report:require('./icons/report.png'),
     stars:require('./icons/stars.png'),
     copy:require('./icons/copy.png'),
+    forwardIcon:require('./icons/corner-up-right.png'),
+    deleteModalIcon:require('./icons/bindelete.png'),
 };
 
 const Images = {

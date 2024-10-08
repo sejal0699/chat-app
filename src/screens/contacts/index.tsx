@@ -29,6 +29,7 @@ const Contact = () => {
   const [allContacts, setAllContacts] = useState<Contact[]>([]);
   const [filteredContacts, setFilteredContacts] = useState<Contact[]>([]);
   const [hasSearched, setHasSearched] = useState<boolean>(false);
+
   useEffect(() => {
     const fetchContacts = async () => {
       const permission = await Contacts.requestPermission();
@@ -39,11 +40,17 @@ const Contact = () => {
           displayName: `${contact.givenName} ${contact.familyName}`.trim(),
           image: contact.hasThumbnail ? contact.thumbnailPath : null,
         }));
-        //@ts-ignore
-        const mergedContacts : Contact[] = [...normalizedContacts, ...contactsData];
-        console.log(mergedContacts);
-        
-        setAllContacts(mergedContacts);
+
+        const mergedContacts: Contact[] = [...normalizedContacts, ...contactsData];
+
+        // Sort contacts in ascending order by displayName
+        const sortedContacts = mergedContacts.sort((a, b) => {
+          const nameA = a.displayName?.toLowerCase() || '';
+          const nameB = b.displayName?.toLowerCase() || '';
+          return nameA.localeCompare(nameB);
+        });
+
+        setAllContacts(sortedContacts);
       } else {
         console.log("Permission to access contacts was denied.");
       }
@@ -58,7 +65,6 @@ const Contact = () => {
     if (query) {
       const filtered = allContacts.filter((contact) => {
         const contactName = contact.displayName || contact.name || '';
-       // console.log('ppp',contact.displayName);
         return contactName.toLowerCase().startsWith(query.toLowerCase());
       });
       setFilteredContacts(filtered);
@@ -66,9 +72,12 @@ const Contact = () => {
       setFilteredContacts([]);
     }
   };
-  const handleClear=()=>{
-    setSearchQuery("")
-  }
+
+  const handleClear = () => {
+    setSearchQuery("");
+    setFilteredContacts([]);
+    setHasSearched(false);
+  };
 
   const getInitials = (name?: string) => {
     if (!name) return '';
@@ -94,49 +103,49 @@ const Contact = () => {
             value={searchQuery}
             onChangeText={handleSearch}
           />
-          <TouchableOpacity onPress={handleClear}>
-          <Image source={Icons.cross} style={styles.crossIcon} />
-          </TouchableOpacity>
+          {hasSearched ? (
+            <TouchableOpacity onPress={handleClear}>
+              <Image source={Icons.cross} style={styles.crossIcon} />
+            </TouchableOpacity>
+          ) : null}
         </View>
       </View>
 
-      {hasSearched ? (
-        filteredContacts.length > 0 ? (
-          <View style={styles.listContainer}>
-            <FlatList
-              data={filteredContacts}
-              keyExtractor={(item) => (item.recordID ? item.recordID : item.id ? item.id.toString() : 'defaultKey')}
-              renderItem={({ item }) => (
-                <TouchableOpacity
-                  onPress={() =>
-                    navigation.navigate(ScreenNames.ChatScreen, { user: item })
-                  }
-                >
-                  <View style={styles.box1}>
-                    <View style={styles.profilePictureContainer}>
-                      <View style={styles.profilePicture}>
-                        <Text style={styles.profileText}>
-                          {item.image ? (
-                            <Image source={{ uri: item.image }}  />
-                          ) : (
-                            getInitials(item.displayName || item.name)
-                          )}
-                        </Text>
-                      </View>
-                    </View>
-                    <Text style={styles.text}>{item.displayName || item.name}</Text>
+      <View style={styles.listContainer}>
+        <FlatList
+          data={hasSearched ? filteredContacts : allContacts}
+          keyExtractor={(item, index) => item.recordID ? item.recordID : `contact-${index}`}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate(ScreenNames.ChatScreen, { user: item })
+              }
+            >
+              <View style={styles.box1}>
+                <View style={styles.profilePictureContainer}>
+                  <View style={styles.profilePicture}>
+                    <Text style={styles.profileText}>
+                      {item.image ? (
+                        <Image source={{ uri: item.image }} />
+                      ) : (
+                        getInitials(item.displayName || item.name)
+                      )}
+                    </Text>
                   </View>
-                </TouchableOpacity>
-              )}
-            />
-          </View>
-        ) : (
+                </View>
+                <Text style={styles.text}>{item.displayName || item.name}</Text>
+              </View>
+            </TouchableOpacity>
+          )}
+        />
+       
+      </View>
+      {hasSearched && filteredContacts.length === 0 && (
           <View style={styles.box}>
             <Image source={Images.searchImage} style={styles.image} />
             <Text style={styles.text}>No Results Found</Text>
           </View>
-        )
-      ) : null}
+        )}
     </SafeAreaView>
   );
 };

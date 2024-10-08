@@ -58,6 +58,7 @@ container: {
         alignItems: "center",
         justifyContent: "center",
         transform: [{ translateY: 230 }],
+   
       },
       listContainer: {
         padding: 1,
