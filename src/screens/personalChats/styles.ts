@@ -57,7 +57,7 @@ export default StyleSheet.create({
     right: 10,
   },
   backBox: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: colors.white,
     width: 48,
     margin: 12,
     borderRadius: 10,
