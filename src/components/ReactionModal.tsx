@@ -47,7 +47,7 @@ const ReactionModal = ({ visible, closeModal,onEmojiPress,onDeletePress }: Secur
 
                         <TouchableOpacity>
                             <View style={styles.optionContainer}>
-                                <Image source={Icons.pinIcon} style={styles.optionIcon} />
+                                <Image source={Icons.forwardIcon} style={styles.optionIcon} />
                                 <Text style={styles.modalOptionText}>Forward</Text>
                             </View>
                         </TouchableOpacity>

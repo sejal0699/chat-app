@@ -28,7 +28,7 @@ const MoreItemsModal = ({ visible, closeModal }: SecureAccountModalProps) => {
 
                         <TouchableOpacity>
                             <View style={styles.optionContainer}>
-                                <Image source={Icons.unpinIcon} style={styles.optionIcon} />
+                                <Image source={Icons.pinIcon} style={styles.optionIcon1} />
                                 <Text style={styles.modalOptionText}>Unpin Chat</Text>
                             </View>
                         </TouchableOpacity>
@@ -98,6 +98,11 @@ const styles = StyleSheet.create({
     optionIcon: {
         width: 24,
         height: 24,
+        marginRight: 10,
+    },
+    optionIcon1: {
+        width: 20,
+        height: 28,
         marginRight: 10,
     },
 });

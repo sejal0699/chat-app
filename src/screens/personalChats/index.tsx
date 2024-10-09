@@ -168,7 +168,7 @@ const ChatScreen = ({ route }: Props) => {
    // console.log("id is", id);
     const storedMessages = await AsyncStorage.getItem(`messages_${chatId}`);
     const messagesArray = storedMessages ? JSON.parse(storedMessages) : [];
-    if (Array.isArray(messagesArray)) {
+    if ((messagesArray)) {
       const updatedMessagesArray = messagesArray.filter(
         (message) => message._id !== id
       );

@@ -56,6 +56,7 @@ const Icons = {
     copy:require('./icons/copy.png'),
     forwardIcon:require('./icons/corner-up-right.png'),
     deleteModalIcon:require('./icons/bindelete.png'),
+   
 };
 
 const Images = {

@@ -43,7 +43,7 @@ export default StyleSheet.create({
   iconImage: {
     width: 35,
     height: 35,
-    marginLeft: 20,
+   
   },
   text: {
     marginTop: 15,
@@ -82,6 +82,8 @@ export default StyleSheet.create({
   cartIcon: {
     marginTop: 20,
     marginRight: 20,
+    backgroundColor:'#FFFFFF1A',
+    
   },
   addIcon: {
     height: 20,
