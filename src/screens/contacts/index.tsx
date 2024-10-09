@@ -144,6 +144,7 @@ const Contact = () => {
           item.recordID ? item.recordID : `contact-${index}`
         }
         renderItem={renderItem}
+        removeClippedSubviews={false}
       />
 </View>
       {hasSearched && filteredContacts.length === 0 && (

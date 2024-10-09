@@ -3,12 +3,12 @@ import { View, Text, Modal, StyleSheet, Image, TouchableOpacity } from 'react-na
 import { Icons, Images } from '../assets';
 import { colors } from '../themes';
 
-interface SecureAccountModalProps {
+interface MoreItemsModalProps {
     visible: boolean;
     closeModal: () => void;
 }
 
-const MoreItemsModal = ({ visible, closeModal }: SecureAccountModalProps) => {
+const MoreItemsModal = ({ visible, closeModal }:  MoreItemsModalProps) => {
     return (
         <Modal
             animationType="slide"

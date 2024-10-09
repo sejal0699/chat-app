@@ -121,6 +121,7 @@ const Chat = () => {
                 item._id ? item._id.toString() : "defaultKey"
               }
               renderItem={renderItem}
+              removeClippedSubviews={false}
             />
           </View>
         )}
