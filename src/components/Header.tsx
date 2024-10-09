@@ -21,9 +21,11 @@ const Header = () => {
         </View>
 
         <TouchableOpacity onPress={() => navigation.navigate(ScreenNames.Contacts)}>
+        
           <View style={styles.cartIcon}>
             <Image source={Icons.plusIcon} style={styles.iconImage} />
           </View>
+       
         </TouchableOpacity>
       </View>
     </View>
@@ -34,12 +36,14 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.strongBlue,
   },
+ 
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 10,
     height: 110,
+
    
   },
   headerContent: {
@@ -57,13 +61,13 @@ const styles = StyleSheet.create({
   },
   location: {
     color: colors.white,
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
     marginTop:15,
     marginLeft:10
   },
   name: {
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: '600',
     color: colors.white,
     marginTop: 4,
@@ -71,13 +75,16 @@ const styles = StyleSheet.create({
   },
   cartIcon: {
     flexDirection: 'row',
-    marginTop: 50,
-    marginRight: 20,
+   top:30,
+    marginRight: 16,
+    backgroundColor:'#FFFFFF1A',
+    padding:8,
+    borderRadius:8
   },
   iconImage: {
-    width: 22,
-    height: 24,
-    marginLeft: 10,
+    width: 20,
+    height: 22,
+  
   },
 });
 

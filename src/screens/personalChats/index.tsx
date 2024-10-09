@@ -89,6 +89,7 @@ const ChatScreen = ({ route }: Props) => {
                 padding: 5,
                 backgroundColor: colors.white,
                 borderRadius: 10,
+              
               }}
             >
               <Text style={{ color: isUserMessage ?colors.white : colors.black }}>

@@ -131,7 +131,7 @@ const Contact = () => {
           ) : null}
         </View>
       </View>
-
+      <View style={styles.listContainer}>
       <FlatList
         ListEmptyComponent={
           <View style={styles.box}>
@@ -145,7 +145,7 @@ const Contact = () => {
         }
         renderItem={renderItem}
       />
-
+</View>
       {hasSearched && filteredContacts.length === 0 && (
         //   <View style={styles.box}>
         //   <Image source={Images.searchImage} style={styles.image} />

@@ -8,23 +8,24 @@ export default StyleSheet.create({
   },
   backBox: {
     backgroundColor: "#FFFFFF",
-    width: "15%",
+    width: "12%",
     marginRight: 10,
-
-    borderRadius: 12,
+    height:'95%',
+    borderRadius: 10,
+    top:2
   },
   backButton: {},
   backIcon: {
     width: 23,
     height: 15,
     alignSelf: "center",
-    marginTop: 20,
+    marginTop: 15,
   },
   searchBox: {
     backgroundColor: colors.white,
     borderRadius: 15,
     width: "80%",
-    paddingVertical: 20,
+    paddingVertical: 16,
     paddingLeft: 10,
     flexDirection: "row",
     justifyContent: "space-between",
@@ -38,10 +39,11 @@ export default StyleSheet.create({
     justifyContent: "space-around",
   },
   text: {
-    fontWeight: "bold",
+  
     alignSelf: "center",
-    fontSize: 20,
+    fontSize: 16,
     marginBottom: 10,
+    fontWeight:'semibold'
   },
   image: {},
   box: {
@@ -50,13 +52,21 @@ export default StyleSheet.create({
     
 
   },
+  listContainer: {
+    padding: 1,
+    alignContent: 'space-between',
+    backgroundColor: '#F8F9F9',
+    margin: 20,
+    borderRadius: 10,
+    width:'90%'
+  },
   box1: {
-    flexDirection: "row",
-    gap: 10,
-    margin: 10,
-    padding: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "#CCCCCC",
+    flexDirection:'row',
+    gap:8,
+    margin:8,
+    padding:8,
+borderBottomWidth:0.2,
+borderBottomColor:colors.lightGrey,
   },
   profileSection: {
     alignItems: "center",

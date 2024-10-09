@@ -31,16 +31,18 @@ export default StyleSheet.create({
   },
   box1:{
     flexDirection:'row',
-    gap:10,
-    margin:10,
-    padding:10,
-borderBottomWidth:1,
-borderBottomColor:'#CCCCCC'
+    gap:8,
+    margin:8,
+    padding:8,
+borderBottomWidth:0.2,
+borderBottomColor:colors.lightGrey,
+
   
   },
   lastMessageText: {
     fontSize: 12,
-    color: 'gray', 
+    color: 'gray',
+    top:5 
   },
   userInfo: {
     marginLeft: 10, 
@@ -63,8 +65,8 @@ profilePictureContainer: {
 
 },
 profilePicture: {
-    width: 50, 
-    height: 50,
+    width: 45, 
+    height: 45,
     borderRadius: 25, 
     backgroundColor: '#007AFF',
     justifyContent: 'center', 
@@ -73,15 +75,17 @@ profilePicture: {
   },
   profileText: {
     color: 'white', 
-    fontSize: 18, 
+    fontSize: 16, 
     fontWeight: 'bold',
     textAlign: 'center',
   },
   text:{
-    fontWeight:'bold',
+    fontWeight:'semibold',
     alignSelf:'flex-start',
-    fontSize:20,
-    marginBottom:10,
+    fontSize:16,
+    marginBottom:8,
+    top:5
+
   
       },
       listContainer: {
