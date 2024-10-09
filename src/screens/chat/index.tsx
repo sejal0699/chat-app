@@ -5,7 +5,6 @@ import {
   FlatList,
   TouchableOpacity,
   Image,
-  Button,
   TextInput,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -15,6 +14,8 @@ import { Icons } from "../../assets";
 import EmptyScreen from "../../components/EmptyScreen";
 import { useNavigation } from "@react-navigation/native";
 import { ScreenNames } from "../../navigation/screenNames";
+import { getInitials } from "../../utils/getInitials";
+import { USER_TYPE } from "../../utils/enum";
 
 interface ChatUser {
   _id: number;
@@ -33,7 +34,6 @@ const Chat = () => {
 
   const loadChatUsers = async () => {
     const storedChatUsers = await AsyncStorage.getItem("chatUsers");
-
     if (storedChatUsers) {
       const parsedUsers = JSON.parse(storedChatUsers);
       setChatUsers(parsedUsers);
@@ -66,18 +66,40 @@ const Chat = () => {
     loadChatUsers(); 
   };
 
-  const getInitials = (name?: string, displayName?: string) => {
-    const effectiveName = name || displayName;
-    if (!effectiveName) return "";
-    const nameArray = effectiveName.split(" ");
-    const initials = nameArray.map((n) => n.charAt(0).toUpperCase()).join("");
-    return initials;
-  };
+  const renderItem = ({ item }: { item: ChatUser }) => (
+    <TouchableOpacity
+      onPress={() =>
+        navigation.navigate(ScreenNames.ChatScreen, { user: item })
+      }
+    >
+      <View style={styles.box1}>
+        <View style={styles.profilePictureContainer}>
+          <View style={styles.profilePicture}>
+            <Text style={styles.profileText}>
+              {getInitials(item.name, item.displayName)}
+            </Text>
+          </View>
+        </View>
+
+        <View style={styles.userInfo}>
+          <Text style={styles.text}>
+            {item.name || item.displayName}
+          </Text>
+          {item.lastMessage && (
+            <Text style={styles.lastMessageText}>
+              {item.lastMessage}
+            </Text>
+          )}
+        </View>
+      </View>
+    </TouchableOpacity>
+  );
+
+
 
   return (
     <View style={styles.container}>
       <Header />
-      
       <View style={styles.searchBox}>
         <Image source={Icons.search} />
         <TextInput
@@ -87,7 +109,7 @@ const Chat = () => {
         />
       </View>
 
-      <Button title="Clear Chat Users" onPress={clearChatUsers} />
+      {/* <Button title="Clear Chat Users" onPress={clearChatUsers} /> */}
       <View style={styles.box}>
         {filteredContacts.length === 0 ? (
           <EmptyScreen />
@@ -98,34 +120,7 @@ const Chat = () => {
               keyExtractor={(item) =>
                 item._id ? item._id.toString() : "defaultKey"
               }
-              renderItem={({ item }) => (
-                <TouchableOpacity
-                  onPress={() =>
-                    navigation.navigate(ScreenNames.ChatScreen, { user: item })
-                  }
-                >
-                  <View style={styles.box1}>
-                    <View style={styles.profilePictureContainer}>
-                      <View style={styles.profilePicture}>
-                        <Text style={styles.profileText}>
-                          {getInitials(item.name, item.displayName)}
-                        </Text>
-                      </View>
-                    </View>
-
-                    <View style={styles.userInfo}>
-                      <Text style={styles.text}>
-                        {item.name || item.displayName}
-                      </Text>
-                      {item.lastMessage && (
-                        <Text style={styles.lastMessageText}>
-                          {item.lastMessage}
-                        </Text>
-                      )}
-                    </View>
-                  </View>
-                </TouchableOpacity>
-              )}
+              renderItem={renderItem}
             />
           </View>
         )}

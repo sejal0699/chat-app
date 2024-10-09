@@ -10,6 +10,7 @@ import MoreItemsModal from "../../components/MoreItemsModal";
 import ReactionModal from "../../components/ReactionModal";
 import CustomModal from "../../components/CustomModal";
 import { colors } from "../../themes";
+import { getInitials } from "../../utils/getInitials";
 
 interface User {
   _id: number;
@@ -37,13 +38,7 @@ const customtInputToolbar = (props: any) => {
   return (
     <InputToolbar
       {...props}
-      containerStyle={{
-        backgroundColor: colors.white,
-        borderTopColor: "#E8E8E8",
-        borderTopWidth: 1,
-        padding: 8,
-        borderRadius: 20,
-      }}
+      containerStyle={styles.containerstyle}
     />
   );
 };
@@ -58,7 +53,7 @@ const ChatScreen = ({ route }: Props) => {
   const [messageIdToDelete, setMessageIdToDelete] = useState<number | null>(null);
   const [text,setText]=useState('')
   const chatId = user._id;
-  console.log(chatId);
+  //console.log(chatId);
   const navigation = useNavigation();
   const [personchat, setPersonChat] = useState([]);
 
@@ -138,7 +133,7 @@ const ChatScreen = ({ route }: Props) => {
           }
           return msg;
         });
-        console.log("ooooooooo", updatedMessages);
+      //  console.log("ooooooooo", updatedMessages);
         AsyncStorage.setItem(`messages_${chatId}`,JSON.stringify(updatedMessages));
         return updatedMessages;
       });
@@ -169,7 +164,7 @@ const ChatScreen = ({ route }: Props) => {
   
 
   const handleDeletes = async (id: number) => {
-    console.log("id is", id);
+   // console.log("id is", id);
     const storedMessages = await AsyncStorage.getItem(`messages_${chatId}`);
     const messagesArray = storedMessages ? JSON.parse(storedMessages) : [];
     if (Array.isArray(messagesArray)) {
@@ -279,15 +274,6 @@ const ChatScreen = ({ route }: Props) => {
     }
   };
 
-  const getInitials = (name?: string, displayName?: string) => {
-    const effectiveName = name || displayName;
-    console.log("effectiveName", effectiveName);
-    if (!effectiveName) return "";
-    const nameArray = effectiveName.split(" ");
-    console.log("nameArray", nameArray);
-    const initials = nameArray.map((n) => n.charAt(0));
-    return initials;
-  };
 
   const handlePress = () => {
     setModalVisible(true);

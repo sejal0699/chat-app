@@ -11,9 +11,11 @@ import React, { useState, useEffect } from "react";
 import styles from "./styles";
 import { Icons, Images } from "../../assets";
 import { useNavigation } from "@react-navigation/native";
-import Contacts from 'react-native-contacts';
+import Contacts from "react-native-contacts";
 import contactsData from "../../data.json";
 import { ScreenNames } from "../../navigation/screenNames";
+import { getInitials } from "../../utils/getInitials";
+import { CONTACT_STATUS } from "../../utils/enum";
 
 interface Contact {
   recordID?: string;
@@ -33,20 +35,23 @@ const Contact = () => {
   useEffect(() => {
     const fetchContacts = async () => {
       const permission = await Contacts.requestPermission();
-      if (permission === 'authorized') {
+      if (permission === CONTACT_STATUS.AUTHORIZED) {
         const fetchedContacts = await Contacts.getAll();
-        const normalizedContacts = fetchedContacts.map(contact => ({
+        const normalizedContacts = fetchedContacts.map((contact) => ({
           recordID: contact.recordID,
           displayName: `${contact.givenName} ${contact.familyName}`.trim(),
           image: contact.hasThumbnail ? contact.thumbnailPath : null,
         }));
 
-        const mergedContacts: Contact[] = [...normalizedContacts, ...contactsData];
+        const mergedContacts: Contact[] = [
+          ...normalizedContacts,
+          ...contactsData,
+        ];
 
         // Sort contacts in ascending order by displayName
         const sortedContacts = mergedContacts.sort((a, b) => {
-          const nameA = a.displayName?.toLowerCase() || '';
-          const nameB = b.displayName?.toLowerCase() || '';
+          const nameA = a.displayName?.toLowerCase() || "";
+          const nameB = b.displayName?.toLowerCase() || "";
           return nameA.localeCompare(nameB);
         });
 
@@ -64,7 +69,7 @@ const Contact = () => {
     setHasSearched(true);
     if (query) {
       const filtered = allContacts.filter((contact) => {
-        const contactName = contact.displayName || contact.name || '';
+        const contactName = contact.displayName || contact.name || "";
         return contactName.toLowerCase().startsWith(query.toLowerCase());
       });
       setFilteredContacts(filtered);
@@ -79,12 +84,28 @@ const Contact = () => {
     setHasSearched(false);
   };
 
-  const getInitials = (name?: string) => {
-    if (!name) return '';
-    const nameArray = name.split(' ');
-    const initials = nameArray.map((n) => n.charAt(0).toUpperCase()).join('');
-    return initials;
-  };
+  const renderItem = ({ item }: { item: Contact }) => (
+    <TouchableOpacity
+      onPress={() =>
+        navigation.navigate(ScreenNames.ChatScreen, { user: item })
+      }
+    >
+      <View style={styles.box1}>
+        <View style={styles.profilePictureContainer}>
+          <View style={styles.profilePicture}>
+            <Text style={styles.profileText}>
+              {item.image ? (
+                <Image source={{ uri: item.image }} />
+              ) : (
+                getInitials(item.displayName || item.name)
+              )}
+            </Text>
+          </View>
+        </View>
+        <Text style={styles.text}>{item.displayName || item.name}</Text>
+      </View>
+    </TouchableOpacity>
+  );
 
   return (
     <SafeAreaView style={styles.container}>
@@ -111,41 +132,27 @@ const Contact = () => {
         </View>
       </View>
 
-      <View style={styles.listContainer}>
-        <FlatList
-          data={hasSearched ? filteredContacts : allContacts}
-          keyExtractor={(item, index) => item.recordID ? item.recordID : `contact-${index}`}
-          renderItem={({ item }) => (
-            <TouchableOpacity
-              onPress={() =>
-                navigation.navigate(ScreenNames.ChatScreen, { user: item })
-              }
-            >
-              <View style={styles.box1}>
-                <View style={styles.profilePictureContainer}>
-                  <View style={styles.profilePicture}>
-                    <Text style={styles.profileText}>
-                      {item.image ? (
-                        <Image source={{ uri: item.image }} />
-                      ) : (
-                        getInitials(item.displayName || item.name)
-                      )}
-                    </Text>
-                  </View>
-                </View>
-                <Text style={styles.text}>{item.displayName || item.name}</Text>
-              </View>
-            </TouchableOpacity>
-          )}
-        />
-       
-      </View>
-      {hasSearched && filteredContacts.length === 0 && (
+      <FlatList
+        ListEmptyComponent={
           <View style={styles.box}>
             <Image source={Images.searchImage} style={styles.image} />
             <Text style={styles.text}>No Results Found</Text>
           </View>
-        )}
+        }
+        data={hasSearched ? filteredContacts : allContacts}
+        keyExtractor={(item, index) =>
+          item.recordID ? item.recordID : `contact-${index}`
+        }
+        renderItem={renderItem}
+      />
+
+      {hasSearched && filteredContacts.length === 0 && (
+        //   <View style={styles.box}>
+        //   <Image source={Images.searchImage} style={styles.image} />
+        //   <Text style={styles.text}>No Results Found</Text>
+        // </View>
+        <></>
+      )}
     </SafeAreaView>
   );
 };

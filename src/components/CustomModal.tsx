@@ -45,7 +45,7 @@ const CustomModal = (props: CustomModalProps) => {
             animationType="slide"
             onRequestClose={closeModal}
         >
-            <View style={styles.modalOverlay}>
+            <View style={[styles.modalOverlay]}>
                 <View style={styles.modalContent}>
                     <Image style={styles.modalIcon} source={imageSource} />
                     <Text style={styles.modalTitle}>{title}</Text>

@@ -107,5 +107,14 @@ export default StyleSheet.create({
   },
   icon:{
      alignSelf: "center" 
+  },
+  containerstyle:{
+    
+      backgroundColor: colors.white,
+      borderTopColor: "#E8E8E8",
+      borderTopWidth: 1,
+      padding: 8,
+      borderRadius: 20,
+    
   }
 });
