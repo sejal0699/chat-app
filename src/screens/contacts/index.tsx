@@ -16,7 +16,7 @@ import contactsData from "../../data.json";
 import { ScreenNames } from "../../navigation/screenNames";
 import { getInitials } from "../../utils/getInitials";
 import { CONTACT_STATUS } from "../../utils/enum";
-
+import firestore from "@react-native-firebase/firestore"
 interface Contact {
   recordID?: string;
   displayName?: string;
@@ -32,37 +32,66 @@ const Contact = () => {
   const [filteredContacts, setFilteredContacts] = useState<Contact[]>([]);
   const [hasSearched, setHasSearched] = useState<boolean>(false);
 
-  useEffect(() => {
-    const fetchContacts = async () => {
-      const permission = await Contacts.requestPermission();
-      if (permission === CONTACT_STATUS.AUTHORIZED) {
-        const fetchedContacts = await Contacts.getAll();
-        const normalizedContacts = fetchedContacts.map((contact) => ({
-          recordID: contact.recordID,
-          displayName: `${contact.givenName} ${contact.familyName}`.trim(),
-          image: contact.hasThumbnail ? contact.thumbnailPath : null,
-        }));
+  useEffect(()=>{
+    const usersFromDatabase=async()=>{
+      const users = await firestore().collection('users').get();
+      console.log(users);
+      // const user = await firestore().collection(users').doc('ABC').get();
+    }
+    usersFromDatabase();
+      },[])
+  // useEffect(() => {
+  //   const fetchContacts = async () => {
+  //     const permission = await Contacts.requestPermission();
+  //     if (permission === CONTACT_STATUS.AUTHORIZED) {
+  //       const fetchedContacts = await Contacts.getAll();
+  //       const normalizedContacts = fetchedContacts.map((contact) => ({
+  //         recordID: contact.recordID,
+  //         displayName: `${contact.givenName} ${contact.familyName}`.trim(),
+  //         image: contact.hasThumbnail ? contact.thumbnailPath : null,
+  //       }));
 
-        const mergedContacts: Contact[] = [
-          ...normalizedContacts,
-          ...contactsData,
-        ];
+  //       const mergedContacts: Contact[] = [
+  //         ...normalizedContacts,
+  //         ...contactsData,
+  //       ];
 
-        // Sort contacts in ascending order by displayName
-        const sortedContacts = mergedContacts.sort((a, b) => {
-          const nameA = a.displayName?.toLowerCase() || "";
-          const nameB = b.displayName?.toLowerCase() || "";
-          return nameA.localeCompare(nameB);
-        });
+  //       // Sort contacts in ascending order by displayName
+  //       const sortedContacts = mergedContacts.sort((a, b) => {
+  //         const nameA = a.displayName?.toLowerCase() || "";
+  //         const nameB = b.displayName?.toLowerCase() || "";
+  //         return nameA.localeCompare(nameB);
+  //       });
 
-        setAllContacts(sortedContacts);
-      } else {
-        console.log("Permission to access contacts was denied.");
-      }
-    };
+  //       setAllContacts(sortedContacts);
+  //       saveContactsToFirestore(sortedContacts);
+  //     } else {
+  //       console.log("Permission to access contacts was denied.");
+  //     }
+  //   };
 
-    fetchContacts();
-  }, []);
+  //   fetchContacts();
+  // }, []);
+
+
+
+  const saveContactsToFirestore = async (contacts) => {
+    const allContacts = firestore().collection('contacts');
+    console.log('allContacts',allContacts);
+    
+    const batch = firestore().batch();
+    console.log('batch stored',batch);
+    console.log('contacts',contacts);
+    
+    contacts.forEach((contact) => {
+      const contactRef = allContacts.doc(contact.recordID || contact.displayName);
+      console.log('contactRef',contactRef);
+      
+      batch.set(contactRef, contact);
+    });
+
+    await batch.commit();
+  };
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);

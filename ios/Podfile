@@ -49,12 +49,24 @@ linkage = ENV['USE_FRAMEWORKS']
 if linkage != nil
   Pod::UI.puts "Configuring Pod with #{linkage}ally linked Frameworks".green
   #use_frameworks! :linkage => linkage.to_sym
-  use_frameworks! :linkage => :static
-  $RNFirebaseAsStaticFramework = true
+  # use_frameworks! :linkage => :static
+  # $RNFirebaseAsStaticFramework = true
 end
 
 target 'deom' do
   config = use_native_modules!
+
+  # pod 'Firebase', :modular_headers => true
+  # pod 'FirebaseCoreInternal', :modular_headers => true
+  # pod 'GoogleUtilities', :modular_headers => true
+  # pod 'FirebaseCore', :modular_headers => true
+  # pod 'Firebase/Messaging', :modular_headers => true
+  # pod 'FirebaseCoreExtension', :modular_headers => true
+  # pod 'FirebaseFirestore', :modular_headers => true
+  # pod 'FirebaseFirestoreInternal', :modular_headers => true
+
+  
+
 
   use_react_native!(
     :path => config[:reactNativePath],
@@ -67,8 +79,6 @@ target 'deom' do
   # pod 'Permission-PhotoLibrary', :path => "#{permissions_path}/PhotoLibrary"
 
 
-pod 'GoogleUtilities', :modular_headers => true
-pod 'FirebaseCoreInternal', :modular_headers => true
 
 
 
