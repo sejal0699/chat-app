@@ -67,8 +67,6 @@ target 'deom' do
   # pod 'Permission-PhotoLibrary', :path => "#{permissions_path}/PhotoLibrary"
 
 
-pod 'GoogleUtilities', :modular_headers => true
-pod 'FirebaseCoreInternal', :modular_headers => true
 
 
 
